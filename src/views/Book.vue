@@ -33,13 +33,13 @@ function addToCart(arr, img, bname, athr, desc, prc) {
 
             <!-- Book Image -->
 
-            <div class="col-sm-6 col-md-4 d-flex justify-content-start">
+            <div class="col-md-6 col-lg-4 d-flex justify-content-start">
                 <img style=" object-fit: fill" height="400" width="250" :src="this.$route.query.image">
             </div>
 
             <!-- Book name, Author's name and the book description are on the same line-->
 
-            <div class="col-sm-6 col-md-8">
+            <div class="col-md-6 col-lg-8">
 
                 <!-- Book Name-->
 
@@ -67,7 +67,7 @@ function addToCart(arr, img, bname, athr, desc, prc) {
         <!-- Book Price-->
 
         <div class="row my-3">
-            <div class="col-sm-6 col-md-4 ">
+            <div class="col-sm-6 col-lg-4 ">
                 <h5 class="d-flex justify-content-start">${{ this.$route.query.price }}</h5>
             </div>
         </div>
