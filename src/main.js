@@ -100,7 +100,7 @@ base('All books').select({
 
 /* wait for three seconds after refreshing the website to give enough time for the data to be retrieved from the database */
 
-sleep(3000).then(() => {
+sleep(10000).then(() => {
 
     /* define global variables for each array of a genre to be easily accessed throughout all views */
 
