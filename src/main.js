@@ -8,10 +8,7 @@ import Airtable from "airtable";
 // creating a new Vue instance
 const app = createApp(App)
 
-// a function to manage delays
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+
 
 //defining temporary arrays to store data received from the database (airtable)
 
@@ -27,7 +24,9 @@ const temp_banner_books = [];
 
 // Start API calls to get data from the database (airtable)
 
-const base = new Airtable({ apiKey: 'patYqGigP1h6wsxqD.b7759fb0e3e11f9e8eacfc3748b0ffcfaadc106f138ed31934039d327a40d3f1' }).base('appCw5PrKAtgb5AAp');
+function getTable(){
+    return new Promise((resolve,reject) =>{
+        const base = new Airtable({ apiKey: 'patYqGigP1h6wsxqD.b7759fb0e3e11f9e8eacfc3748b0ffcfaadc106f138ed31934039d327a40d3f1' }).base('appCw5PrKAtgb5AAp');
 
 // Reading all records from the 'all books' table, for each record we get the: bookname, image, price, description, author and genre
 
@@ -94,13 +93,24 @@ base('All books').select({
     fetchNextPage();
 }
     , function done(err) {
-        if (err) { console.error(err); return; }
+        if (err) { 
+            reject("error");
+         }
+         else{
+            resolve("success");
+         }
     });
+    });
+}
+
 
 
 /* wait for three seconds after refreshing the website to give enough time for the data to be retrieved from the database */
 
-sleep(3000).then(() => {
+getTable()
+.then((message) => {
+
+    console.log(message);
 
     /* define global variables for each array of a genre to be easily accessed throughout all views */
 
@@ -128,6 +138,9 @@ sleep(3000).then(() => {
 
     app.use(router) // to allow the vue instance to use the router 
     app.mount('#app') //to connect the vue instace with the html div with id 'app'
+})
+.catch((error) => {
+    console.log(error);
 });
 
 
